@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tukaram Consultancy - Complete SaaS Portal</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        /* ============================================
+           TOP NAVIGATION BAR - ENHANCED WITH LEGAL & MASTER LOGIN
+           ============================================ */
+        .top-nav {
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #764ba2;
+            text-decoration: none;
+        }
+        .nav-brand img { height: 40px; border-radius: 8px; }
+        .nav-links { display: flex; gap: 10px; align-items: center; }
+        .nav-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .nav-btn-outline { background: transparent; color: #374151; border: 2px solid #e5e7eb; }
+        .nav-btn-outline:hover { background: #f9fafb; border-color: #d1d5db; }
+        .nav-btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 6px rgba(102,126,234,0.3);
+        }
+        .nav-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(102,126,234,0.4); }
+        .nav-btn-admin { background: #1f2937; color: white; border: 2px solid #1f2937; }
+        .nav-btn-admin:hover { background: #374151; transform: translateY(-2px); }
+        
+        /* ★★★ NEW: Master Login Button Style ★★★ */
+        .nav-btn-master {
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            color: white;
+            border: 2px solid #7c3aed;
+            box-shadow: 0 4px 6px rgba(124,58,237,0.3);
+        }
+        .nav-btn-master:hover {
+            background: linear-gradient(135deg, #6d28d9 0%, #9333ea 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(124,58,237,0.4);
+        }
+
+        /* ★★★ NEW: Legal Dropdown Menu Styles ★★★ */
+        .legal-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .legal-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #ffffff;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            z-index: 1001;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .legal-dropdown-content::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: 20px;
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            transform: rotate(45deg);
+            border-left: 1px solid #e5e7eb;
+            border-top: 1px solid #e5e7eb;
+        }
+        .legal-dropdown-content a {
+            color: #374151;
+            padding: 14px 18px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-bottom: 1px solid #f3f4f6;
+        }
+        .legal-dropdown-content a:last-child { border-bottom: none; }
+        .legal-dropdown-content a:hover {
+            background-color: #f9fafb;
+            color: #764ba2;
+            padding-left: 22px;
+        }
+        .legal-dropdown-content a .icon { font-size: 1.1rem; }
+        .legal-dropdown:hover .legal-dropdown-content { display: block; }
+        .legal-dropdown:hover .nav-btn-outline {
+            background: #f9fafb;
+            border-color: #d1d5db;
+        }
+
+        .user-pill {
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 16px; background: #f3f4f6;
+            border-radius: 20px; font-size: 0.9rem; font-weight: 500; color: #374151;
+        }
+        .user-pill .avatar {
+            width: 28px; height: 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 700;
+        }
+
+        /* ============================================
+           SYSTEM REQUIREMENTS BANNER
+           ============================================ */
+        .requirements-banner {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: white;
+            padding: 20px;
+            border-bottom: 3px solid #fbbf24;
+        }
+        .requirements-container { max-width: 1400px; margin: 0 auto; }
+        .requirements-title {
+            font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;
+            display: flex; align-items: center; gap: 8px; color: #fbbf24;
+        }
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px; font-size: 0.9rem;
+        }
+        .requirement-item {
+            display: flex; align-items: flex-start; gap: 8px;
+            background: rgba(255,255,255,0.1); padding: 10px;
+            border-radius: 8px; border-left: 3px solid #fbbf24;
+        }
+        .requirement-item .icon { font-size: 1.2rem; flex-shrink: 0; }
+        .requirement-item strong { color: #fbbf24; display: block; margin-bottom: 2px; }
+        .requirement-item small { opacity: 0.9; font-size: 0.85rem; }
+        .warning-box {
+            background: rgba(239,68,68,0.2); border: 2px solid #ef4444;
+            border-radius: 8px; padding: 12px; margin-top: 12px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .warning-box .icon { font-size: 1.5rem; }
+
+        /* ============================================
+           ★★★ GLOBAL RESOURCES BANNER (NEW) ★★★
+           ============================================ */
+        .global-resources-banner {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 24px 20px;
+            border-bottom: 4px solid #38bdf8;
+        }
+        .global-resources-container { max-width: 1400px; margin: 0 auto; }
+        .global-resources-title {
+            font-size: 1.15rem; font-weight: 800; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 10px;
+            color: #38bdf8; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .global-resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+        }
+        /* Global resource button card */
+        .global-res-btn {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .global-res-btn::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.07);
+            transition: opacity 0.2s;
+            opacity: 0;
+        }
+        .global-res-btn:hover::before { opacity: 1; }
+        .global-res-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+
+        .global-res-btn.yt-red {
+            background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%);
+            border-color: #ef4444;
+        }
+        .global-res-btn.yt-orange {
+            background: linear-gradient(135deg, #92400e 0%, #d97706 100%);
+            border-color: #f59e0b;
+        }
+        .global-res-btn.yt-green {
+            background: linear-gradient(135deg, #064e3b 0%, #059669 100%);
+            border-color: #10b981;
+        }
+        .global-res-btn.qr-purple {
+            background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);
+            border-color: #a78bfa;
+        }
+
+        .global-res-btn .btn-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        .global-res-btn .btn-text { flex: 1; }
+        .global-res-btn .btn-text .btn-label {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 3px;
+        }
+        .global-res-btn .btn-text .btn-title {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        .global-res-btn .btn-arrow {
+            font-size: 1rem;
+            opacity: 0.7;
+            transition: transform 0.2s;
+        }
+        .global-res-btn:hover .btn-arrow { transform: translateX(4px); }
+
+        /* QR Tip note */
+        .qr-tip-note {
+            margin-top: 14px;
+            background: rgba(56,189,248,0.12);
+            border: 1px dashed #38bdf8;
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-size: 0.88rem;
+            color: #bae6fd;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .qr-tip-note strong { color: #38bdf8; }
+        .qr-tip-note a { color: #7dd3fc; text-decoration: underline; }
+
+        /* ============================================
+           ORIGINAL STYLES (Preserved)
+           ============================================ */
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+
+        header {
+            text-align: center; color: white;
+            margin-bottom: 40px; padding-top: 20px;
+        }
+        header img { height: 80px; margin-bottom: 20px; }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        header p { font-size: 1.1em; opacity: 0.95; }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex; gap: 10px; margin-bottom: 30px;
+            flex-wrap: wrap; justify-content: center;
+        }
+        .tab {
+            padding: 15px 30px; background: rgba(255,255,255,0.2);
+            color: white; border: none; border-radius: 8px;
+            cursor: pointer; transition: all 0.3s; font-size: 1em; font-weight: 600;
+        }
+        .tab.active, .tab:hover { background: white; color: #667eea; transform: translateY(-2px); }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .card {
+            background: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+            gap: 30px; margin-top: 20px;
+        }
+        .product-card {
+            background: white; border-radius: 16px; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            display: flex; flex-direction: column;
+            border: 2px solid transparent;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            border-color: #667eea;
+        }
+        .product-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; padding: 22px 25px; text-align: center; position: relative;
+        }
+        .product-code {
+            font-size: 0.85em; opacity: 0.9; margin-bottom: 8px;
+            text-transform: uppercase; letter-spacing: 1px;
+            background: rgba(255,255,255,0.2); display: inline-block;
+            padding: 4px 12px; border-radius: 20px;
+        }
+        .product-name { font-size: 1.3em; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+        .product-desc { font-size: 0.88em; opacity: 0.9; line-height: 1.4; }
+
+        .product-body {
+            padding: 22px; flex-grow: 1; display: flex; flex-direction: column;
+        }
+
+        /* ★★★ PRODUCT RESOURCE BUTTONS SECTION (NEW / ENHANCED) ★★★ */
+        .product-resources {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 18px;
+            border: 1px solid #e2e8f0;
+        }
+        .resource-section-title {
+            font-size: 0.78rem; font-weight: 800; color: #64748b;
+            text-transform: uppercase; letter-spacing: 0.8px;
+            margin-bottom: 12px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .resource-section-title::after {
+            content: ''; flex: 1; height: 1px; background: #e2e8f0;
+        }
+
+        /* NEW: Styled resource action buttons */
+        .resource-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .res-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 14px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.22s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .res-action-btn:hover { transform: translateX(5px); }
+
+        /* Manual Button - Blue */
+        .res-action-btn.btn-manual {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            color: #1d4ed8;
+            border-color: #93c5fd;
+        }
+        .res-action-btn.btn-manual:hover {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59,130,246,0.25);
+            color: #1e40af;
+        }
+
+        /* Video Button - Red */
+        .res-action-btn.btn-video {
+            background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+            color: #be123c;
+            border-color: #fda4af;
+        }
+        .res-action-btn.btn-video:hover {
+            background: linear-gradient(135deg, #ffe4e6, #fecdd3);
+            border-color: #f43f5e;
+            box-shadow: 0 4px 12px rgba(244,63,94,0.25);
+            color: #9f1239;
+        }
+
+        /* Testing/Demo Button - Green */
+        .res-action-btn.btn-testing {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            color: #15803d;
+            border-color: #86efac;
+        }
+        .res-action-btn.btn-testing:hover {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-color: #22c55e;
+            box-shadow: 0 4px 12px rgba(34,197,94,0.25);
+            color: #166534;
+        }
+
+        .res-action-btn .res-btn-icon {
+            font-size: 1.3rem;
+            width: 28px;
+            text-align: center;
+            flex-shrink: 0;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+        }
+        .res-action-btn .res-btn-content { flex: 1; }
+        .res-action-btn .res-btn-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            opacity: 0.75;
+            display: block;
+            margin-bottom: 1px;
+        }
+        .res-action-btn .res-btn-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            display: block;
+        }
+        .res-action-btn .res-btn-arrow {
+            font-size: 0.85rem;
+            opacity: 0.6;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+        .res-action-btn:hover .res-btn-arrow { transform: translateX(3px); opacity: 1; }
+
+        /* Badge on button */
+        .res-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+        .badge-pdf { background: #dbeafe; color: #1d4ed8; }
+        .badge-yt  { background: #ffe4e6; color: #be123c; }
+        .badge-live{ background: #dcfce7; color: #15803d; }
+
+        .suitability {
+            background: #f0f4ff; border-left: 4px solid #667eea;
+            padding: 12px; margin-bottom: 16px;
+            border-radius: 5px; font-size: 0.9em; color: #333;
+        }
+
+        .currency-tabs {
+            display: flex; gap: 10px; margin-bottom: 12px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .currency-tab {
+            padding: 10px 20px; background: none; border: none;
+            cursor: pointer; font-weight: 600; color: #999;
+            border-bottom: 3px solid transparent; transition: all 0.3s ease;
+        }
+        .currency-tab.active { color: #667eea; border-bottom-color: #667eea; }
+
+        .pricing-section { margin-bottom: 16px; flex-grow: 1; }
+        .pricing-options { display: none; }
+        .pricing-options.active { display: block; }
+        .pricing-option {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 0; border-bottom: 1px solid #f0f0f0;
+        }
+        .option-label { font-weight: 600; color: #555; }
+        .option-price { font-size: 1.3em; font-weight: 700; color: #667eea; }
+
+        .purchase-section { border-top: 2px solid #f0f0f0; padding-top: 18px; }
+        .purchase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+        .buy-btn {
+            padding: 12px; border: 2px solid #28a745; background: white;
+            color: #28a745; border-radius: 8px; cursor: pointer;
+            font-weight: 600; font-size: 0.9em; transition: all 0.3s; text-align: center;
+        }
+        .buy-btn:hover { background: #28a745; color: white; transform: translateY(-2px); }
+        .subscribe-btn {
+            padding: 12px; border: 2px solid #667eea; background: white;
+            color: #667eea; border-radius: 8px; cursor: pointer;
+            font-weight: 600; font-size: 0.9em; transition: all 0.3s; text-align: center;
+        }
+        .subscribe-btn:hover { background: #667eea; color: white; transform: translateY(-2px); }
+
+        /* Form Styling */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #333; font-weight: 600; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 12px; border: 2px solid #e0e0e0;
+            border-radius: 8px; font-size: 16px; transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: #667eea; }
+
+        .plan-selector { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+        .plan-option {
+            flex: 1; min-width: 150px; padding: 15px; border: 2px solid #e0e0e0;
+            border-radius: 8px; text-align: center; cursor: pointer; transition: all 0.3s;
+        }
+        .plan-option:hover { border-color: #667eea; }
+        .plan-option.selected { border-color: #667eea; background: #eef2ff; }
+        .plan-option .plan-name { font-weight: 600; color: #333; margin-bottom: 5px; }
+        .plan-option .plan-price { font-size: 1.3em; color: #667eea; font-weight: bold; }
+
+        .btn-primary {
+            width: 100%; padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; border: none; border-radius: 8px;
+            font-weight: 700; font-size: 1em; cursor: pointer; transition: all 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102,126,234,0.4); }
+
+        .btn-success {
+            width: 100%; padding: 15px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white; border: none; border-radius: 8px;
+            font-weight: 700; font-size: 1em; cursor: pointer; transition: all 0.3s;
+        }
+        .btn-success:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(40,167,69,0.4); }
+
+        .buy-hero {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white; padding: 40px; text-align: center;
+            margin: -30px -30px 30px -30px; border-radius: 15px 15px 0 0;
+        }
+        .lifetime-badge {
+            display: inline-block; background: #ffd700; color: #333;
+            padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9em; margin-top: 10px;
+        }
+
+        .order-summary {
+            background: #f8f9fa; padding: 25px; border-radius: 15px;
+            margin-bottom: 30px; border: 2px solid #e0e0e0;
+        }
+        .order-row {
+            display: flex; justify-content: space-between;
+            padding: 12px 0; border-bottom: 1px solid #e0e0e0;
+        }
+        .order-row:last-child { border-bottom: none; }
+        .order-row.total {
+            font-size: 1.3em; font-weight: bold; color: #667eea;
+            border-top: 2px solid #667eea; margin-top: 10px; padding-top: 15px;
+        }
+
+        .payment-options {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; margin: 30px 0;
+        }
+        .payment-btn {
+            padding: 20px; border: 2px solid #e0e0e0;
+            border-radius: 12px; text-align: center; cursor: pointer;
+            transition: all 0.3s; background: white;
+        }
+        .payment-btn:hover {
+            border-color: #667eea; transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102,126,234,0.2);
+        }
+
+        .manual-section {
+            margin-top: 30px; padding: 25px; background: #fff8e1;
+            border-radius: 12px; border-left: 4px solid #ffc107;
+        }
+        .auto-ref-field {
+            background: #f0f4ff; border: 2px solid #667eea;
+            color: #667eea; font-weight: bold; font-family: monospace;
+        }
+
+        .alert { padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .alert-success { background: #e8f5e9; border-left: 4px solid #4caf50; color: #2e7d32; }
+        .alert-warning { background: #fff3e0; border-left: 4px solid #ff9800; color: #e65100; }
+        .alert-danger  { background: #ffebee; border-left: 4px solid #f44336; color: #c62828; }
+        .alert-info    { background: #e3f2fd; border-left: 4px solid #2196f3; color: #1976d2; }
+
+        .status-badge {
+            display: inline-block; padding: 10px 25px; border-radius: 25px;
+            font-weight: bold; margin-top: 15px; text-transform: uppercase; font-size: 0.9em;
+        }
+        .status-active  { background: #4caf50; color: white; }
+        .status-pending { background: #ff9800; color: white; }
+        .status-expired { background: #f44336; color: white; }
+
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 30px 0; }
+        .info-card {
+            background: #f8f9fa; padding: 20px; border-radius: 12px; border-left: 4px solid #667eea;
+        }
+        .info-card h4 { color: #666; font-size: 0.85em; text-transform: uppercase; margin-bottom: 8px; }
+        .info-card p  { font-size: 1.2em; font-weight: bold; color: #333; word-break: break-word; }
+
+        .progress-bar { width: 100%; height: 10px; background: #e0e0e0; border-radius: 5px; overflow: hidden; margin: 10px 0; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #4caf50, #8bc34a); transition: width 0.3s; }
+
+        .loading { text-align: center; padding: 40px; color: white; font-size: 1.2em; }
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-radius: 50%; border-top: 4px solid white;
+            width: 40px; height: 40px;
+            animation: spin 1s linear infinite; margin: 20px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .hidden { display: none !important; }
+
+        .sheet-url-box {
+            background: #e8f5e9; border: 2px solid #4caf50;
+            border-radius: 10px; padding: 20px; margin: 20px 0; text-align: center;
+        }
+        .sheet-url-box a { color: #2e7d32; font-weight: bold; text-decoration: none; word-break: break-all; }
+        .sheet-url-box a:hover { text-decoration: underline; }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex; justify-content: center; align-items: center; z-index: 2000;
+        }
+        .modal-content {
+            background: white; padding: 40px; border-radius: 15px;
+            max-width: 500px; width: 90%; text-align: center;
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .modal-content h2 { color: #667eea; margin-bottom: 20px; }
+        .modal-content p  { color: #666; margin-bottom: 30px; line-height: 1.6; }
+        .modal-buttons { display: flex; gap: 15px; justify-content: center; }
+        .modal-btn {
+            padding: 12px 30px; border: none; border-radius: 8px;
+            cursor: pointer; font-weight: 600; transition: all 0.3s;
+            text-decoration: none; display: inline-block;
+        }
+        .modal-btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .modal-btn-secondary { background: #e0e0e0; color: #333; }
+        .modal-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+        /* ★★★ SETTINGS PANEL – ENHANCED FOR PRODUCT RESOURCES ★★★ */
+        .settings-panel {
+            background: white; border-radius: 15px; padding: 30px;
+            margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .settings-section {
+            margin-bottom: 30px; padding-bottom: 30px; border-bottom: 2px solid #f0f0f0;
+        }
+        .settings-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .settings-title {
+            font-size: 1.2rem; color: #333; margin-bottom: 6px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .settings-subtitle {
+            font-size: 0.88rem; color: #64748b; margin-bottom: 20px;
+        }
+        .settings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .setting-item {
+            background: #f8fafc; padding: 18px; border-radius: 10px; border: 2px solid #e2e8f0;
+        }
+        .setting-item label {
+            display: block; font-weight: 600; color: #475569; margin-bottom: 8px; font-size: 0.88rem;
+        }
+        .setting-item input, .setting-item select {
+            width: 100%; padding: 10px; border: 2px solid #cbd5e1; border-radius: 6px; font-size: 0.92rem;
+        }
+        .setting-item input:focus, .setting-item select:focus { outline: none; border-color: #667eea; }
+
+        /* Product resource row in settings */
+        .prod-res-row {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+        .prod-res-row:hover { border-color: #667eea; }
+        .prod-res-row-header {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+        }
+        .prod-res-code-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; font-weight: 700; font-size: 0.82rem;
+            padding: 4px 12px; border-radius: 20px; flex-shrink: 0;
+        }
+        .prod-res-name {
+            font-weight: 700; font-size: 0.95rem; color: #1e293b;
+        }
+        .prod-res-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 10px;
+        }
+        .prod-res-field label {
+            font-size: 0.75rem; font-weight: 700; color: #64748b;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            display: flex; align-items: center; gap: 5px; margin-bottom: 5px;
+        }
+        .prod-res-field input {
+            width: 100%; padding: 9px 12px;
+            border: 2px solid #cbd5e1; border-radius: 7px;
+            font-size: 0.85rem; color: #334155;
+            transition: border-color 0.2s;
+        }
+        .prod-res-field input:focus { outline: none; border-color: #667eea; }
+        .prod-res-field input.field-manual:focus { border-color: #3b82f6; }
+        .prod-res-field input.field-video:focus  { border-color: #ef4444; }
+        .prod-res-field input.field-demo:focus   { border-color: #22c55e; }
+
+        /* Global resource settings row */
+        .global-res-setting-row {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border: 2px solid #7dd3fc;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 14px;
+        }
+        .global-res-setting-row label {
+            display: flex; align-items: center; gap: 8px;
+            font-weight: 700; font-size: 0.92rem; color: #0369a1; margin-bottom: 8px;
+        }
+        .global-res-setting-row input {
+            width: 100%; padding: 9px 12px;
+            border: 2px solid #7dd3fc; border-radius: 7px;
+            font-size: 0.88rem; color: #0c4a6e;
+            background: white;
+        }
+        .global-res-setting-row input:focus { outline: none; border-color: #0ea5e9; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            header h1 { font-size: 1.8em; }
+            .products-grid { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .plan-selector { flex-direction: column; }
+            .purchase-grid { grid-template-columns: 1fr; }
+            .requirements-grid { grid-template-columns: 1fr; }
+            .global-resources-grid { grid-template-columns: 1fr; }
+            .prod-res-fields { grid-template-columns: 1fr; }
+            
+            /* ★★★ Mobile adjustments for new nav elements ★★★ */
+            .legal-dropdown-content {
+                right: -50px;
+                min-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         SYSTEM REQUIREMENTS BANNER
+         ============================================ -->
+    <div class="requirements-banner">
+        <div class="requirements-container">
+            <div class="requirements-title">⚙️ System Requirements &amp; Essential Information</div>
+            <div class="requirements-grid">
+                <div class="requirement-item">
+                    <span class="icon">☁️</span>
+                    <div>
+                        <strong>Google Cloud Platform</strong>
+                        <small>This system uses Google Apps Script &amp; Google Cloud as the server infrastructure</small>
+                    </div>
+                </div>
+                <div class="requirement-item">
+                    <span class="icon">📧</span>
+                    <div>
+                        <strong>Gmail ID Essential</strong>
+                        <small>Google Gmail ID is mandatory. Google Drive forms the base of this entire system</small>
+                    </div>
+                </div>
+                <div class="requirement-item">
+                    <span class="icon">🚀</span>
+                    <div>
+                        <strong>Easy Deployment</strong>
+                        <small>Just 2 clicks needed to start the system (Google Apps Script deployment process)</small>
+                    </div>
+                </div>
+                <div class="requirement-item">
+                    <span class="icon">🔒</span>
+                    <div>
+                        <strong>Google Cloud Security</strong>
+                        <small>Entire system is secured by Google Cloud and linked to your Gmail login credentials</small>
+                    </div>
+                </div>
+                <div class="requirement-item">
+                    <span class="icon">💼</span>
+                    <div>
+                        <strong>Small Business Optimized</strong>
+                        <small>Specially designed for small businesses with limited size database requirements</small>
+                    </div>
+                </div>
+                <div class="requirement-item">
+                    <span class="icon">🧹</span>
+                    <div>
+                        <strong>Database Maintenance</strong>
+                        <small>Clean database/transaction records periodically after proper backup. Clean manually with care</small>
+                    </div>
+                </div>
+            </div>
+            <div class="warning-box">
+                <span class="icon">⚠️</span>
+                <div>
+                    <strong>Warning:</strong> If you try to create illegal copies or tamper with the source code, the entire system will fail and even "Tukaram Consultancy" could not recover it. Please use the system as intended.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         ★★★ GLOBAL RESOURCES BANNER (NEW) ★★★
+         Applies to ALL Products
+         ============================================ -->
+    <div class="global-resources-banner">
+        <div class="global-resources-container">
+            <div class="global-resources-title">
+                🌐 Global Resources — Applicable to All Products
+            </div>
+            <div class="global-resources-grid" id="globalResourcesGrid">
+
+                <!-- Button 1: User Instruction & Essential Requirement -->
+                <a href="https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg "
+                   target="_blank" class="global-res-btn yt-red">
+                    <span class="btn-icon">▶️</span>
+                    <span class="btn-text">
+                        <span class="btn-label">📋 Watch Video</span>
+                        <span class="btn-title">User Instruction &amp; Essential Requirement</span>
+                    </span>
+                    <span class="btn-arrow">→</span>
+                </a>
+
+                <!-- Button 2: After Purchase System / Software Deployment -->
+                <a href="https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg "
+                   target="_blank" class="global-res-btn yt-orange">
+                    <span class="btn-icon">🚀</span>
+                    <span class="btn-text">
+                        <span class="btn-label">🎬 Deployment Guide</span>
+                        <span class="btn-title">After Purchase System / Software Deployment</span>
+                    </span>
+                    <span class="btn-arrow">→</span>
+                </a>
+
+                <!-- Button 3: Convert System URL to GitHub URL -->
+                <a href="https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg "
+                   target="_blank" class="global-res-btn yt-green">
+                    <span class="btn-icon">🔗</span>
+                    <span class="btn-text">
+                        <span class="btn-label">⚙️ Supporting Feature</span>
+                        <span class="btn-title">Convert System URL to GitHub URL</span>
+                    </span>
+                    <span class="btn-arrow">→</span>
+                </a>
+
+                <!-- Button 4: QR Code Tip -->
+                <a href="https://qr-code-generator.com " target="_blank" class="global-res-btn qr-purple">
+                    <span class="btn-icon">📱</span>
+                    <span class="btn-text">
+                        <span class="btn-label">💡 Pro Tip</span>
+                        <span class="btn-title">Generate QR Code from Any URL (Free Tool)</span>
+                    </span>
+                    <span class="btn-arrow">→</span>
+                </a>
+
+            </div>
+
+            <!-- QR Code Tip Note -->
+            <div class="qr-tip-note">
+                <span style="font-size:1.3rem;">💡</span>
+                <span>
+                    <strong>QR Code Tip:</strong> You can convert any URL/Link into a QR Code using free online tools like
+                    <a href="https://qr-code-generator.com " target="_blank">qr-code-generator.com</a> or
+                    <a href="https://www.qr-code-monkey.com " target="_blank">qr-code-monkey.com</a>.
+                    Share QR Codes with your clients for quick access to manuals, videos, or demo portals!
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         TOP NAVIGATION BAR - ENHANCED WITH LEGAL & MASTER LOGIN
+         ============================================ -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="#" class="nav-brand" onclick="showTab('products'); return false;">
+                <img src="https://drive.google.com/uc?export=view&id=1PAUX1sZCHrciisU6LOkYGjeDtgwyYkTg " alt="Tukaram Logo">
+                <span>Tukaram Store</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <!-- ★★★ NEW: Legal Dropdown Menu ★★★ -->
+                <div class="legal-dropdown">
+                    <button class="nav-btn nav-btn-outline">
+                        ⚖️ Legal <span style="margin-left:4px;">▼</span>
+                    </button>
+                    <div class="legal-dropdown-content">
+                        <a href="https://tukaramconsultancy.blogspot.com/p/privacy-policy.html" target="_blank">
+                            <span class="icon">🔒</span> Privacy Policy
+                        </a>
+                        <a href="https://tukaramconsultancy.blogspot.com/p/about-us.html" target="_blank">
+                            <span class="icon">🏢</span> About Us
+                        </a>
+                        <a href="https://tukaramconsultancy.blogspot.com/p/disclaimer.html" target="_blank">
+                            <span class="icon">📋</span> Disclaimer
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ★★★ NEW: Master Login Button ★★★ -->
+                <a href="https://script.google.com/macros/s/AKfycbwGf1VCtLpMurvv-eArn3beKeOc2LNvtjT2vnJEeBr_zzQF-hMKPxEGgiQX3EnZ5a3A7w/exec" 
+                   target="_blank" 
+                   class="nav-btn nav-btn-master">
+                    🔐 Master Login
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Tukaram Software Store</h1>
+            <p>तुकाराम कन्सल्टन्सी | Quality Software Solutions</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('products')" id="tab-products">📦 Products</button>
+            <button class="tab" onclick="showTab('buy')" id="tab-buy">🛒 Buy Product</button>
+            <button class="tab" onclick="showTab('subscribe')" id="tab-subscribe">🔄 Subscribe</button>
+            <button class="tab" onclick="showTab('checkout')" id="tab-checkout">💳 Checkout</button>
+            <button class="tab" onclick="showTab('status')" id="tab-status">📊 Check Status</button>
+            <button class="tab" onclick="showTab('settings')" id="tab-settings">⚙️ Settings</button>
+        </div>
+
+        <!-- ============================================
+             PRODUCTS TAB
+             ============================================ -->
+        <div id="products" class="tab-content active">
+            <div class="card">
+                <h2>Available Products</h2>
+                <p style="color:#666;margin-bottom:20px;">
+                    उपलब्ध उत्पादने | Choose between one-time purchase (lifetime) or subscription
+                </p>
+                <div id="productsList" class="products-grid">
+                    <div class="loading">
+                        <p>Loading products...</p>
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             BUY PRODUCT TAB
+             ============================================ -->
+        <div id="buy" class="tab-content">
+            <div class="card">
+                <div class="buy-hero">
+                    <h1>🛒 Buy Product</h1>
+                    <p>एक वेळचा खरेदी | One-Time Purchase - Lifetime Access</p>
+                    <div class="lifetime-badge">✓ आजीवन परवाना | Lifetime License</div>
+                </div>
+                <form id="buyForm">
+                    <div class="form-group">
+                        <label>Select Product *</label>
+                        <select id="buyProductSelect" onchange="updateBuyPricing()" required>
+                            <option value="">Choose a product...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Currency *</label>
+                        <select id="buyCurrency" onchange="updateBuyPricing()">
+                            <option value="INR">INR (₹) - Indian Rupee</option>
+                            <option value="USD">USD ($) - US Dollar</option>
+                        </select>
+                    </div>
+                    <div id="buyPricingInfo" class="hidden" style="background:#f8f9fa;padding:20px;border-radius:10px;margin-bottom:20px;">
+                        <div class="order-row total" style="border:none;margin:0;">
+                            <span>One-Time Price:</span>
+                            <strong id="buyPriceDisplay" style="font-size:1.5em;color:#28a745;">-</strong>
+                        </div>
+                        <div class="lifetime-badge" style="margin-top:10px;">✓ आजीवन परवाना | Lifetime License</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address * | ईमेल पत्ता</label>
+                        <input type="email" id="buyEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Company Name | कंपनीचे नाव</label>
+                        <input type="text" id="buyCompany" placeholder="Your Company">
+                    </div>
+                    <button type="button" class="btn-success" onclick="createOneTimePurchase()" id="buyBtn">
+                        Proceed to Buy - खरेदी करा
+                    </button>
+                </form>
+                <div id="buySuccess" class="hidden alert-success" style="margin-top:20px;">
+                    <h3>✅ Purchase Initiated!</h3>
+                    <p>Redirecting to secure checkout...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             SUBSCRIBE TAB
+             ============================================ -->
+        <div id="subscribe" class="tab-content">
+            <div class="card">
+                <h2>🔄 New Subscription</h2>
+                <p style="color:#666;margin-bottom:20px;">सदस्यता | Choose your subscription plan</p>
+                <form id="subscribeForm">
+                    <div class="form-group">
+                        <label>Select Product *</label>
+                        <select id="productSelect" onchange="updateSubscriptionPlans()" required>
+                            <option value="">Choose a product...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Product Registration Number (Optional - for renewals)</label>
+                        <input type="text" id="productRegNumber" placeholder="e.g., REG-20240115-123456">
+                        <small style="color:#666;display:block;margin-top:5px;">Leave empty for new subscription. Enter existing number to renew/extend.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Currency *</label>
+                        <select id="currency" onchange="updateSubscriptionPlans()">
+                            <option value="INR">INR (₹) - Indian Rupee</option>
+                            <option value="USD">USD ($) - US Dollar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Plan *</label>
+                        <div id="planSelector" class="plan-selector">
+                            <p style="color:#666;">Select a product and currency first</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address * | ईमेल पत्ता</label>
+                        <input type="email" id="customerEmail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Company Name | कंपनीचे नाव</label>
+                        <input type="text" id="companyName" placeholder="Your Company">
+                    </div>
+                    <button type="button" class="btn-primary" onclick="createSubscription()" id="createSubBtn">
+                        Create Subscription - सदस्यता तयार करा
+                    </button>
+                </form>
+                <div id="subscriptionSuccess" class="hidden alert-success" style="margin-top:20px;">
+                    <h3>✅ Subscription Created!</h3>
+                    <p>Redirecting to checkout...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             CHECKOUT TAB
+             ============================================ -->
+        <div id="checkout" class="tab-content">
+            <div class="card">
+                <div style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:40px;text-align:center;margin:-30px -30px 30px -30px;border-radius:15px 15px 0 0;">
+                    <h1>🔐 Secure Checkout</h1>
+                    <p id="checkoutSubtitle">सुरक्षित चेकआउट | Complete your purchase</p>
+                </div>
+                <div id="noCheckoutData" class="alert-warning">
+                    <strong>⚠️ No Active Checkout</strong>
+                    <p>Please select a product to purchase first.</p>
+                    <div style="margin-top:15px;">
+                        <button onclick="showTab('buy')" class="btn-success" style="margin-right:10px;width:auto;padding:10px 20px;">Buy Product</button>
+                        <button onclick="showTab('subscribe')" class="btn-primary" style="width:auto;padding:10px 20px;">Subscribe</button>
+                    </div>
+                </div>
+                <div id="checkoutContent" class="hidden">
+                    <div class="order-summary">
+                        <h3>Order Summary | ऑर्डर सारांश</h3>
+                        <div class="order-row"><span>Product Code:</span><strong id="checkoutProductCode">-</strong></div>
+                        <div class="order-row"><span>Product Name:</span><strong id="checkoutProductName">-</strong></div>
+                        <div class="order-row"><span>Plan Type:</span><strong id="checkoutPlan">-</strong></div>
+                        <div class="order-row"><span>Registration Number:</span><strong id="checkoutRegNumber">-</strong></div>
+                        <div class="order-row"><span>Customer Email:</span><strong id="checkoutEmail">-</strong></div>
+                        <div class="order-row"><span>Currency:</span><strong id="checkoutCurrency">-</strong></div>
+                        <div class="order-row total"><span>Total Amount:</span><strong id="checkoutTotal">-</strong></div>
+                    </div>
+                    <h3>Select Payment Method | पेमेंट पद्धत निवडा</h3>
+                    <div class="payment-options">
+                        <div class="payment-btn" onclick="payWithPayPal()">
+                            <div style="font-size:40px;color:#003087;">P</div>
+                            <div><strong>PayPal</strong></div>
+                            <div style="font-size:0.8em;color:#666;margin-top:5px;">International Payments</div>
+                        </div>
+                        <div class="payment-btn" onclick="payWithRazorpay()">
+                            <div style="font-size:40px;color:#528FF0;">R</div>
+                            <div><strong>Razorpay</strong></div>
+                            <div style="font-size:0.8em;color:#666;margin-top:5px;">UPI, Cards, NetBanking</div>
+                        </div>
+                        <div class="payment-btn" onclick="showManualForm()">
+                            <div style="font-size:40px;">🏦</div>
+                            <div><strong>Bank Transfer</strong></div>
+                            <div style="font-size:0.8em;color:#666;margin-top:5px;">Manual Payment</div>
+                        </div>
+                    </div>
+                    <div id="manualForm" style="display:none;">
+                        <div class="manual-section">
+                            <h4>🏦 Manual Payment Instructions</h4>
+                            <p>Please transfer <strong id="manualAmount">$0</strong> to:</p>
+                            <ul style="margin:15px 0;padding-left:20px;">
+                                <li><strong>Bank:</strong> State Bank of India</li>
+                                <li><strong>Account:</strong> 123456789012</li>
+                                <li><strong>IFSC:</strong> SBIN0001234</li>
+                                <li><strong>Account Name:</strong> Tukaram Consultancy</li>
+                            </ul>
+                            <p>After payment, enter the details below:</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Transaction Reference Number *</label>
+                            <input type="text" id="referenceNumber" class="auto-ref-field" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Payment Date *</label>
+                            <input type="date" id="paymentDate">
+                        </div>
+                        <div class="form-group">
+                            <label>Amount Paid *</label>
+                            <input type="number" id="amountPaid" step="0.01" min="0" placeholder="Enter amount paid">
+                        </div>
+                        <div class="form-group">
+                            <label>Payment Proof (Screenshot/Receipt)</label>
+                            <input type="file" id="paymentProof" accept="image/*,.pdf">
+                        </div>
+                        <button class="btn-success" onclick="submitManualPayment()">✓ Submit for Approval</button>
+                    </div>
+                    <div id="paymentSuccess" class="hidden alert-success" style="margin-top:20px;">
+                        <h3>✅ Payment Successful!</h3>
+                        <p id="paymentSuccessMessage">Your purchase is being processed...</p>
+                        <div id="sheetUrlContainer" class="hidden sheet-url-box">
+                            <h4>📥 Your Software is Ready!</h4>
+                            <p>A copy has been created in your Google Drive:</p>
+                            <a id="sheetUrl" href="#" target="_blank">Open Your Sheet</a>
+                        </div>
+                    </div>
+                    <div id="paymentPending" class="hidden alert-info" style="margin-top:20px;">
+                        <h3>⏳ Payment Pending Approval</h3>
+                        <p>Your payment has been submitted for admin approval. You will receive an email once approved.</p>
+                        <p><strong>Registration Number:</strong> <span id="pendingRegNumber"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             STATUS TAB
+             ============================================ -->
+        <div id="status" class="tab-content">
+            <div class="card">
+                <h2>📊 Subscription Status</h2>
+                <p style="color:#666;margin-bottom:20px;">सदस्यता स्थिती | Check your subscription details</p>
+                <div id="statusSearchForm">
+                    <div class="form-group">
+                        <label>Email Address * | ईमेल पत्ता</label>
+                        <input type="email" id="checkEmail" placeholder="Enter registered email">
+                    </div>
+                    <div class="form-group">
+                        <label>Product Registration Number (Optional)</label>
+                        <input type="text" id="checkRegNumber" placeholder="e.g., REG-20240115-123456">
+                    </div>
+                    <button class="btn-primary" onclick="checkStatus()" id="checkStatusBtn">
+                        Check Status - स्थिती तपासा
+                    </button>
+                </div>
+                <div id="statusLoading" class="hidden loading">
+                    <p>Checking status...</p>
+                    <div class="spinner"></div>
+                </div>
+                <div id="statusNotFound" class="hidden alert-warning" style="margin-top:20px;">
+                    <strong>❌ Not Found</strong>
+                    <p id="statusErrorMsg">No subscription found.</p>
+                </div>
+                <div id="statusDetails" class="hidden" style="margin-top:20px;">
+                    <div style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:40px;text-align:center;border-radius:15px;margin-bottom:30px;">
+                        <h1>📊 Subscription Details</h1>
+                        <div id="statusBadge" class="status-badge">Active</div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-card"><h4>Product Registration Number</h4><p id="statusRegNumber">-</p></div>
+                        <div class="info-card"><h4>Product</h4><p id="statusProductName">-</p></div>
+                        <div class="info-card"><h4>Plan Type</h4><p id="statusPlan">-</p></div>
+                        <div class="info-card"><h4>Status</h4><p id="statusText">-</p></div>
+                        <div class="info-card"><h4>Expiry Date</h4><p id="statusExpiry">-</p></div>
+                        <div class="info-card"><h4>Days Remaining</h4><p id="statusDaysLeftText">-</p></div>
+                    </div>
+                    <h3>License Key | परवाना की</h3>
+                    <div style="margin-top:15px;padding:20px;background:#f5f5f5;border-radius:10px;">
+                        <code id="statusLicenseKey" style="font-size:1.1em;color:#667eea;word-break:break-all;">-</code>
+                    </div>
+                    <div id="statusSheetUrl" class="hidden sheet-url-box" style="margin-top:20px;">
+                        <h4>📥 Your Software</h4>
+                        <a id="statusSheetLink" href="#" target="_blank">Open Your Sheet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             ★★★ SETTINGS TAB — FULLY ENHANCED ★★★
+             ============================================ -->
+        <div id="settings" class="tab-content">
+            <div class="settings-panel">
+                <h2>⚙️ Portal Settings</h2>
+                <p style="color:#666;margin-bottom:25px;">Configure your Tukaram Consultancy portal preferences</p>
+
+                <!-- ─── Section 1: Global Resources (All Products) ─── -->
+                <div class="settings-section">
+                    <h3 class="settings-title">🌐 Global Resource Links — All Products</h3>
+                    <p class="settings-subtitle">
+                        These YouTube video links are shown in the top banner and apply to <strong>all products</strong>.
+                        Update them here to change what appears in the Global Resources banner.
+                    </p>
+
+                    <div class="global-res-setting-row">
+                        <label>▶️ User Instruction &amp; Essential Requirement Video (YouTube)</label>
+                        <input type="url" id="globalVideoInstruction"
+                            value="https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg "
+                            onchange="updateGlobalResource('instruction', this.value)"
+                            placeholder="YouTube Video URL">
+                    </div>
+
+                    <div class="global-res-setting-row">
+                        <label>🚀 After Purchase System / Software Deployment Video (YouTube)</label>
+                        <input type="url" id="globalVideoDeployment"
+                            value="https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg "
+                            onchange="updateGlobalResource('deployment', this.value)"
+                            placeholder="YouTube Video URL">
+                    </div>
+
+                    <div class="global-res-setting-row">
+                        <label>🔗 Convert System URL to GitHub URL — Supporting Feature Video (YouTube)</label>
+                        <input type="url" id="globalVideoGithub"
+                            value="https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg "
+                            onchange="updateGlobalResource('github', this.value)"
+                            placeholder="YouTube Video URL">
+                    </div>
+
+                    <div style="margin-top:14px;padding:12px 16px;background:#fefce8;border:1px dashed #fbbf24;border-radius:8px;font-size:0.88rem;color:#78350f;">
+                        💡 <strong>QR Code Tip:</strong> Convert any of these URLs to a QR Code using
+                        <a href="https://qr-code-generator.com " target="_blank" style="color:#b45309;font-weight:700;">qr-code-generator.com</a> or
+                        <a href="https://www.qr-code-monkey.com " target="_blank" style="color:#b45309;font-weight:700;">qr-code-monkey.com</a>.
+                        Print and share QR codes with clients for instant access!
+                    </div>
+                </div>
+
+                <!-- ─── Section 2: Per-Product Resource Links ─── -->
+                <div class="settings-section">
+                    <h3 class="settings-title">📦 Per-Product Resource Links</h3>
+                    <p class="settings-subtitle">
+                        Configure the <strong>Manual (PDF)</strong>, <strong>Usage Video (YouTube)</strong>, and
+                        <strong>Testing/Demo URL</strong> for each individual product.
+                        These appear as action buttons on each product card in the Products tab.
+                    </p>
+
+                    <!-- Legend -->
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;">
+                        <span style="display:flex;align-items:center;gap:5px;font-size:0.82rem;font-weight:600;color:#1d4ed8;">
+                            <span>📄</span> Manual (PDF - Google Drive)
+                        </span>
+                        <span style="display:flex;align-items:center;gap:5px;font-size:0.82rem;font-weight:600;color:#be123c;">
+                            <span>🎥</span> Usage Video (YouTube)
+                        </span>
+                        <span style="display:flex;align-items:center;gap:5px;font-size:0.82rem;font-weight:600;color:#15803d;">
+                            <span>🌐</span> Testing / Live Demo URL
+                        </span>
+                    </div>
+
+                    <div id="productResourcesSettings">
+                        <!-- Dynamically populated by JS -->
+                    </div>
+                </div>
+
+                <!-- ─── Section 3: System Configuration ─── -->
+                <div class="settings-section">
+                    <h3 class="settings-title">🔧 System Configuration</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label>Default Currency</label>
+                            <select id="defaultCurrency" onchange="saveSetting('defaultCurrency', this.value)">
+                                <option value="INR">INR (₹)</option>
+                                <option value="USD">USD ($)</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Language Preference</label>
+                            <select id="languagePref" onchange="saveSetting('languagePref', this.value)">
+                                <option value="en">English</option>
+                                <option value="mr">मराठी (Marathi)</option>
+                                <option value="hi">हिन्दी (Hindi)</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Email Notifications</label>
+                            <select id="emailNotifications" onchange="saveSetting('emailNotifications', this.value)">
+                                <option value="enabled">Enabled</option>
+                                <option value="disabled">Disabled</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Auto-Backup Frequency</label>
+                            <select id="backupFrequency" onchange="saveSetting('backupFrequency', this.value)">
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── Section 4: Payment Settings ─── -->
+                <div class="settings-section">
+                    <h3 class="settings-title">💳 Payment Gateway Settings</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label>PayPal Merchant ID</label>
+                            <input type="text" id="paypalId" placeholder="Enter PayPal ID" onchange="saveSetting('paypalId', this.value)">
+                        </div>
+                        <div class="setting-item">
+                            <label>Razorpay Key ID</label>
+                            <input type="text" id="razorpayId" placeholder="Enter Razorpay Key" onchange="saveSetting('razorpayId', this.value)">
+                        </div>
+                        <div class="setting-item">
+                            <label>Bank Account Number</label>
+                            <input type="text" id="bankAccount" placeholder="123456789012" onchange="saveSetting('bankAccount', this.value)">
+                        </div>
+                        <div class="setting-item">
+                            <label>IFSC Code</label>
+                            <input type="text" id="ifscCode" placeholder="SBIN0001234" onchange="saveSetting('ifscCode', this.value)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── Section 5: Integration Settings ─── -->
+                <div class="settings-section">
+                    <h3 class="settings-title">🔗 Integration Settings</h3>
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label>WhatsApp Business API</label>
+                            <input type="text" id="whatsappApi" placeholder="Enter API Key" onchange="saveSetting('whatsappApi', this.value)">
+                        </div>
+                        <div class="setting-item">
+                            <label>Google Drive Backup Folder</label>
+                            <input type="text" id="backupFolder" placeholder="Folder ID" onchange="saveSetting('backupFolder', this.value)">
+                        </div>
+                        <div class="setting-item">
+                            <label>Organization Name</label>
+                            <input type="text" id="orgName" placeholder="Tukaram Consultancy" onchange="saveSetting('orgName', this.value)">
+                        </div>
+                        <div class="setting-item">
+                            <label>Support Email</label>
+                            <input type="email" id="supportEmail" value="tukaramconsultancy@gmail.com" placeholder="tukaramconsultancy@gmail.com" onchange="saveSetting('supportEmail', this.value)">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:25px;padding:18px;background:#f0f9ff;border-radius:10px;border-left:4px solid #0ea5e9;">
+                    <h4 style="color:#0369a1;margin-bottom:8px;">ℹ️ Settings Information</h4>
+                    <p style="color:#64748b;font-size:0.9rem;">
+                        All changes are saved automatically to <strong>localStorage</strong>.
+                        Product-specific resource links (Manual, Video, Testing URL) updated here are immediately reflected on the product cards in the Products tab.
+                        Global resource links update the top banner buttons that apply to all products.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div><!-- end .container -->
+
+    <!-- Login Required Modal -->
+    <div id="loginModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>🔐 Login Required</h2>
+            <p>Please login or register to purchase or subscribe to our software products. This helps us manage your licenses and provide better support.</p>
+            <div class="modal-buttons">
+                <a href="#" onclick="redirectToLogin(); return false;" class="modal-btn modal-btn-primary">Login</a>
+                <a href="#" onclick="redirectToRegister(); return false;" class="modal-btn modal-btn-secondary">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ============================================
+    // GLOBAL VARIABLES
+    // ============================================
+    let products = [];
+    let selectedPlan = '';
+    let currentLinkData = null;
+    let isOneTimePurchase = false;
+    let currentUser = null;
+    let isAdmin = false;
+
+    // ============================================
+    // PRODUCT CATALOG DATA WITH RESOURCES
+    // ============================================
+    let productCatalog = [
+        { srNo:1,  productCode:"TC-001", productName:"Invoice Management - Sales",
+          manualUrl:"https://drive.google.com/file/d/1HHZvVtE7LBgOq7myVDgNuRMwIyqhP38H/view?usp=sharing ",
+          videoUrl:"https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+          testingUrl:"https://bharattech.great-site.net/housing-society-management-system/ " },
+        { srNo:2,  productCode:"TC-002", productName:"Housing Society Management",
+          manualUrl:"https://drive.google.com/file/d/1HHZvVtE7LBgOq7myVDgNuRMwIyqhP38H/view?usp=sharing ",
+          videoUrl:"https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+          testingUrl:"https://bharattech.great-site.net/housing-society-management-system/ " },
+        { srNo:3,  productCode:"TC-003", productName:"Transport Business Management",
+          manualUrl:"https://drive.google.com/file/d/1HHZvVtE7LBgOq7myVDgNuRMwIyqhP38H/view?usp=sharing ",
+          videoUrl:"https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+          testingUrl:"https://bharattech.great-site.net/housing-society-management-system/ " },
+        { srNo:4,  productCode:"TC-004", productName:"Own Ecommerce / Online Shop",
+          manualUrl:"https://drive.google.com/file/d/1HHZvVtE7LBgOq7myVDgNuRMwIyqhP38H/view?usp=sharing ",
+          videoUrl:"https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+          testingUrl:"https://bharattech.great-site.net/housing-society-management-system/ " },
+        { srNo:5,  productCode:"TC-005", productName:"Dental Clinic Management",
+          manualUrl:"https://drive.google.com/file/d/1HHZvVtE7LBgOq7myVDgNuRMwIyqhP38H/view?usp=sharing ",
+          videoUrl:"https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+          testingUrl:"https://bharattech.great-site.net/housing-society-management-system/ " },
+        { srNo:6,  productCode:"TC-006", productName:"Stock Management",
+          manualUrl:"https://drive.google.com/file/d/1HHZvVtE7LBgOq7myVDgNuRMwIyqhP38H/view?usp=sharing ",
+          videoUrl:"https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+          testingUrl:"https://bharattech.great-site.net/housing-society-management-system/ " },
+        { srNo:7,  productCode:"TC-007", productName:"Online Booking and Job Work",
+          manualUrl:"https://drive.google.com/file/d/1HHZvVtE7LBgOq7myVDgNuRMwIyqhP38H/view?usp=sharing ",
+          videoUrl:"https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+          testingUrl:"https://bharattech.great-site.net/housing-society-management-system/ " },
+        { srNo:8,  productCode:"TC-008", productName:"After Sale Service - Product / Services",
+          manualUrl:"https://drive.google.com/file/d/1HHZvVtE7LBgOq7myVDgNuRMwIyqhP38H/view?usp=sharing ",
+          videoUrl:"https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+          testingUrl:"https://bharattech.great-site.net/housing-society-management-system/ " },
+        { srNo:9,  productCode:"TC-009", productName:"Invoice Management - Sales and Purchase",
+          manualUrl:"https://drive.google.com/file/d/1HHZvVtE7LBgOq7myVDgNuRMwIyqhP38H/view?usp=sharing ",
+          videoUrl:"https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+          testingUrl:"https://bharattech.great-site.net/housing-society-management-system/ " },
+        { srNo:10, productCode:"TC-010", productName:"Firm Management",
+          manualUrl:"https://drive.google.com/file/d/1HHZvVtE7LBgOq7myVDgNuRMwIyqhP38H/view?usp=sharing ",
+          videoUrl:"https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+          testingUrl:"https://bharattech.great-site.net/housing-society-management-system/ " },
+        { srNo:11, productCode:"TC-011", productName:"Redevelopment Document Management System",
+          manualUrl:"https://drive.google.com/file/d/1HHZvVtE7LBgOq7myVDgNuRMwIyqhP38H/view?usp=sharing ",
+          videoUrl:"https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+          testingUrl:"https://bharattech.great-site.net/housing-society-management-system/ " }
+    ];
+
+    // Global resource links data
+    let globalResources = {
+        instruction: "https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+        deployment:  "https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg ",
+        github:      "https://youtube.com/shorts/wuXJyYiYpIc?si=RVehsiaC2yIoKXcg "
+    };
+
+    // ============================================
+    // CONFIGURATION
+    // ============================================
+    const BASE_URL = (function() {
+        let u = '<?= url ?>';
+        return u.endsWith('/') ? u.slice(0,-1) : u;
+    })();
+
+    // ============================================
+    // INITIALIZATION
+    // ============================================
+    document.addEventListener('DOMContentLoaded', function() {
+        loadSavedResources();
+        loadProducts();
+        checkUserStatus();
+        document.getElementById('paymentDate').valueAsDate = new Date();
+        checkUrlParams();
+        initializeSettings();
+    });
+
+    // Load any previously saved resources from localStorage
+    function loadSavedResources() {
+        // Load per-product resources
+        productCatalog.forEach(function(product) {
+            ['manualUrl','videoUrl','testingUrl'].forEach(function(field) {
+                var saved = localStorage.getItem('tukaram_product_' + product.productCode + '_' + field);
+                if (saved) product[field] = saved;
+            });
+        });
+        // Load global resources
+        ['instruction','deployment','github'].forEach(function(key) {
+            var saved = localStorage.getItem('tukaram_global_' + key);
+            if (saved) globalResources[key] = saved;
+        });
+        // Update global resource banner buttons
+        updateGlobalBannerButtons();
+    }
+
+    function updateGlobalBannerButtons() {
+        var buttons = document.querySelectorAll('.global-resources-grid .global-res-btn');
+        if (buttons.length >= 3) {
+            buttons[0].href = globalResources.instruction;
+            buttons[1].href = globalResources.deployment;
+            buttons[2].href = globalResources.github;
+        }
+    }
+
+    // ============================================
+    // SETTINGS MANAGEMENT
+    // ============================================
+    function initializeSettings() {
+        // Load saved system settings
+        var settings = ['defaultCurrency','languagePref','emailNotifications','backupFrequency',
+                        'paypalId','razorpayId','bankAccount','ifscCode',
+                        'whatsappApi','backupFolder','orgName','supportEmail'];
+        settings.forEach(function(setting) {
+            var saved = localStorage.getItem('tukaram_setting_' + setting);
+            if (saved) {
+                var el = document.getElementById(setting);
+                if (el) el.value = saved;
+            }
+        });
+        // Load saved global resource settings into settings inputs
+        var gInstr = localStorage.getItem('tukaram_global_instruction');
+        if (gInstr) document.getElementById('globalVideoInstruction').value = gInstr;
+        var gDeploy = localStorage.getItem('tukaram_global_deployment');
+        if (gDeploy) document.getElementById('globalVideoDeployment').value = gDeploy;
+        var gGithub = localStorage.getItem('tukaram_global_github');
+        if (gGithub) document.getElementById('globalVideoGithub').value = gGithub;
+
+        renderProductResourcesSettings();
+    }
+
+    function saveSetting(key, value) {
+        localStorage.setItem('tukaram_setting_' + key, value);
+        showNotification('Setting saved!', 'success');
+    }
+
+    function updateGlobalResource(key, value) {
+        globalResources[key] = value;
+        localStorage.setItem('tukaram_global_' + key, value);
+        updateGlobalBannerButtons();
+        showNotification('Global resource link updated & banner refreshed!', 'success');
+    }
+
+    function renderProductResourcesSettings() {
+        var container = document.getElementById('productResourcesSettings');
+        if (!container) return;
+        var html = '';
+        productCatalog.forEach(function(product) {
+            html +=
+                '<div class="prod-res-row">' +
+                    '<div class="prod-res-row-header">' +
+                        '<span class="prod-res-code-badge">' + product.productCode + '</span>' +
+                        '<span class="prod-res-name">' + product.productName + '</span>' +
+                    '</div>' +
+                    '<div class="prod-res-fields">' +
+                        '<div class="prod-res-field">' +
+                            '<label>📄 Manual (PDF – Google Drive Link)</label>' +
+                            '<input type="url" class="field-manual"' +
+                                ' value="' + escHtml(product.manualUrl) + '"' +
+                                ' onchange="updateProductResource(\'' + product.productCode + '\', \'manualUrl\', this.value)"' +
+                                ' placeholder="https://drive.google.com/ ...">' +
+                        '</div>' +
+                        '<div class="prod-res-field">' +
+                            '<label>🎥 Usage Video (YouTube Link)</label>' +
+                            '<input type="url" class="field-video"' +
+                                ' value="' + escHtml(product.videoUrl) + '"' +
+                                ' onchange="updateProductResource(\'' + product.productCode + '\', \'videoUrl\', this.value)"' +
+                                ' placeholder="https://youtube.com/ ...">' +
+                        '</div>' +
+                        '<div class="prod-res-field">' +
+                            '<label>🌐 Testing / Live Demo URL</label>' +
+                            '<input type="url" class="field-demo"' +
+                                ' value="' + escHtml(product.testingUrl) + '"' +
+                                ' onchange="updateProductResource(\'' + product.productCode + '\', \'testingUrl\', this.value)"' +
+                                ' placeholder="https://...">' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+        });
+        container.innerHTML = html;
+    }
+
+    function escHtml(str) {
+        return (str || '').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function updateProductResource(productCode, field, value) {
+        var product = productCatalog.find(function(p) { return p.productCode === productCode; });
+        if (product) {
+            product[field] = value;
+            localStorage.setItem('tukaram_product_' + productCode + '_' + field, value);
+            // Re-render product cards to reflect new URL
+            displayProducts(products.length ? products : productCatalog.map(function(c) {
+                return { ProductCode: c.productCode, ProductName: c.productName, ...c };
+            }));
+            showNotification('Updated ' + field.replace('Url','') + ' for ' + productCode, 'success');
+        }
+    }
+
+    function showNotification(message, type) {
+        var div = document.createElement('div');
+        div.style.cssText = 'position:fixed;top:80px;right:20px;padding:14px 22px;background:' +
+            (type==='success' ? '#10b981' : '#3b82f6') +
+            ';color:white;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:9999;font-weight:600;font-size:0.9rem;';
+        div.textContent = '✓ ' + message;
+        document.body.appendChild(div);
+        setTimeout(function() { div.remove(); }, 3000);
+    }
+
+    // ============================================
+    // NAVIGATION & AUTHENTICATION
+    // ============================================
+    function checkUserStatus() {
+        var userDataStr = localStorage.getItem('tukaram_user') || sessionStorage.getItem('tukaram_user');
+        if (userDataStr) {
+            try {
+                var userData = JSON.parse(userDataStr);
+                var hoursDiff = (new Date() - new Date(userData.loginTime)) / 3600000;
+                if (hoursDiff < 24) {
+                    currentUser = userData;
+                    isAdmin = userData.isAdmin || false;
+                    renderNavigation(true);
+                    if (userData.email) {
+                        document.getElementById('buyEmail').value = userData.email;
+                        document.getElementById('customerEmail').value = userData.email;
+                    }
+                    return;
+                }
+            } catch(e) {}
+        }
+        currentUser = null; isAdmin = false;
+        renderNavigation(false);
+    }
+
+    function renderNavigation(isLoggedIn) {
+        var nav = document.getElementById('navLinks');
+        var html = '';
+        
+        // ★★★ NEW: Legal Dropdown Menu (Always visible) ★★★
+        html += '<div class="legal-dropdown">' +
+                    '<button class="nav-btn nav-btn-outline">' +
+                        '⚖️ Legal <span style="margin-left:4px;">▼</span>' +
+                    '</button>' +
+                    '<div class="legal-dropdown-content">' +
+                        '<a href="https://tukaramconsultancy.blogspot.com/p/privacy-policy.html" target="_blank">' +
+                            '<span class="icon">🔒</span> Privacy Policy' +
+                        '</a>' +
+                        '<a href="https://tukaramconsultancy.blogspot.com/p/about-us.html" target="_blank">' +
+                            '<span class="icon">🏢</span> About Us' +
+                        '</a>' +
+                        '<a href="https://tukaramconsultancy.blogspot.com/p/disclaimer.html" target="_blank">' +
+                            '<span class="icon">📋</span> Disclaimer' +
+                        '</a>' +
+                    '</div>' +
+                '</div>';
+
+        // ★★★ NEW: Master Login Button (Always visible) ★★★
+        html += '<a href="https://script.google.com/macros/s/AKfycbwGf1VCtLpMurvv-eArn3beKeOc2LNvtjT2vnJEeBr_zzQF-hMKPxEGgiQX3EnZ5a3A7w/exec" ' +
+                   'target="_blank" ' +
+                   'class="nav-btn nav-btn-master">' +
+                    '🔐 Master Login' +
+                '</a>';
+        
+        if (isLoggedIn) {
+            if (isAdmin) {
+                html += '<div class="user-pill"><div class="avatar">A</div><span>Administrator</span></div>';
+                html += '<a href="#" onclick="goToAdminDashboard();return false;" class="nav-btn nav-btn-admin">⚙️ Admin Dashboard</a>';
+            } else {
+                html += '<div class="user-pill"><div class="avatar">C</div><span>' + (currentUser.name || 'Client') + '</span></div>';
+                html += '<a href="#" onclick="goToClientDashboard();return false;" class="nav-btn nav-btn-primary">📊 My Dashboard</a>';
+            }
+            html += '<button onclick="logout()" class="nav-btn nav-btn-outline">Logout</button>';
+        } else {
+            html += '<a href="#" onclick="promptLogin(\'client\');return false;" class="nav-btn nav-btn-primary">📊 Client Dashboard</a>';
+            html += '<a href="#" onclick="promptLogin(\'admin\');return false;" class="nav-btn nav-btn-admin">⚙️ Admin</a>';
+            html += '<a href="' + BASE_URL + '?page=login" class="nav-btn nav-btn-outline">Login</a>';
+        }
+        nav.innerHTML = html;
+    }
+
+    function goToClientDashboard() {
+        if (!currentUser) { promptLogin('client'); return; }
+        if (isAdmin) { alert("Please use the Admin Dashboard button for admin access."); return; }
+        window.top.location.href = BASE_URL + '?page=dashboard';
+    }
+    function goToAdminDashboard() {
+        if (!currentUser) { promptLogin('admin'); return; }
+        if (!isAdmin) { alert("You do not have admin privileges."); return; }
+        window.top.location.href = BASE_URL + '?page=admin';
+    }
+    function promptLogin(type) {
+        document.getElementById('loginModal').classList.remove('hidden');
+        sessionStorage.setItem('intended_destination', type);
+    }
+    function redirectToLogin()    { window.top.location.href = BASE_URL + '?page=login'; }
+    function redirectToRegister() { window.top.location.href = BASE_URL + '?page=register'; }
+    function logout() {
+        localStorage.removeItem('tukaram_user');
+        sessionStorage.clear();
+        window.top.location.href = BASE_URL + '?page=sales';
+    }
+
+    // Close modal on overlay click
+    document.getElementById('loginModal').addEventListener('click', function(e) {
+        if (e.target === this) this.classList.add('hidden');
+    });
+
+    // ============================================
+    // TAB NAVIGATION
+    // ============================================
+    function showTab(tabName) {
+        if ((tabName === 'buy' || tabName === 'subscribe') && !currentUser) {
+            promptLogin('client'); return;
+        }
+        document.querySelectorAll('.tab-content').forEach(function(el) { el.classList.remove('active'); });
+        document.querySelectorAll('.tab').forEach(function(el) { el.classList.remove('active'); });
+        document.getElementById(tabName).classList.add('active');
+        document.getElementById('tab-' + tabName).classList.add('active');
+        if (tabName === 'checkout') refreshCheckoutDisplay();
+    }
+
+    // ============================================
+    // LOAD & DISPLAY PRODUCTS
+    // ============================================
+    function loadProducts() {
+        try {
+            google.script.run
+                .withSuccessHandler(function(result) {
+                    products = Array.isArray(result) ? result : (result.data || []);
+                    products = products.map(function(p) {
+                        var catalogItem = productCatalog.find(function(c) { return c.productCode === p.ProductCode; });
+                        return Object.assign({}, p, catalogItem || {});
+                    });
+                    displayProducts(products);
+                    populateProductSelect(products);
+                    populateBuyProductSelect(products);
+                })
+                .withFailureHandler(function() {
+                    useCatalogFallback();
+                })
+                .loadProductsForUI();
+        } catch(e) {
+            useCatalogFallback();
+        }
+    }
+
+    function useCatalogFallback() {
+        products = productCatalog.map(function(c) {
+            return Object.assign({ ProductCode: c.productCode, ProductName: c.productName }, c);
+        });
+        displayProducts(products);
+        populateProductSelect(products);
+        populateBuyProductSelect(products);
+    }
+
+    function displayProducts(productList) {
+        var container = document.getElementById('productsList');
+        container.innerHTML = '';
+        if (!productList || productList.length === 0) {
+            container.innerHTML = '<div style="text-align:center;padding:40px;color:#666;">No products available.</div>';
+            return;
+        }
+        productList.forEach(function(product) {
+            var inrSales = parseFloat(product.rsSalesPrice)  || 0;
+            var inrSub1  = parseFloat(product.rsSub1Yrs)     || 0;
+            var usdSales = parseFloat(product.dollSalesPrice) || 0;
+            var usdSub1  = parseFloat(product.dollSub1Yrs)    || 0;
+
+            var hasOneTime     = (inrSales > 0 || usdSales > 0);
+            var hasSubscription= (inrSub1  > 0 || usdSub1  > 0);
+
+            var code = product.ProductCode || product.productCode;
+            var name = product.ProductName || product.productName || '';
+
+            // Purchase buttons
+            var purchaseButtons = '';
+            if (hasOneTime && hasSubscription) {
+                purchaseButtons =
+                    '<div class="purchase-grid">' +
+                        '<button class="buy-btn" onclick="requireLogin(function(){quickBuy(\'' + code + '\');})">' +
+                            '🛒 Buy<br><small>One-Time</small>' +
+                        '</button>' +
+                        '<button class="subscribe-btn" onclick="requireLogin(function(){quickSubscribe(\'' + code + '\');})">' +
+                            '🔄 Subscribe<br><small>Recurring</small>' +
+                        '</button>' +
+                    '</div>';
+            } else if (hasOneTime) {
+                purchaseButtons = '<button class="buy-btn" onclick="requireLogin(function(){quickBuy(\'' + code + '\');})" style="width:100%;">🛒 Buy Now - One Time</button>';
+            } else if (hasSubscription) {
+                purchaseButtons = '<button class="subscribe-btn" onclick="requireLogin(function(){quickSubscribe(\'' + code + '\');})" style="width:100%;">🔄 Subscribe Now</button>';
+            }
+
+            // ★ RESOURCE ACTION BUTTONS — Per-Product ★
+            var manualUrl  = product.manualUrl  || '';
+            var videoUrl   = product.videoUrl   || '';
+            var testingUrl = product.testingUrl || '';
+
+            var resourceHtml = '';
+            if (manualUrl || videoUrl || testingUrl) {
+                resourceHtml =
+                    '<div class="product-resources">' +
+                        '<div class="resource-section-title">📚 Resources &amp; Links</div>' +
+                        '<div class="resource-btns">';
+
+                if (manualUrl) {
+                    resourceHtml +=
+                        '<a href="' + manualUrl + '" target="_blank" class="res-action-btn btn-manual">' +
+                            '<span class="res-btn-icon">📄</span>' +
+                            '<span class="res-btn-content">' +
+                                '<span class="res-btn-label">Google Drive Document</span>' +
+                                '<span class="res-btn-title">Product Manual</span>' +
+                            '</span>' +
+                            '<span class="res-badge badge-pdf">PDF</span>' +
+                            '<span class="res-btn-arrow">→</span>' +
+                        '</a>';
+                }
+                if (videoUrl) {
+                    resourceHtml +=
+                        '<a href="' + videoUrl + '" target="_blank" class="res-action-btn btn-video">' +
+                            '<span class="res-btn-icon">🎥</span>' +
+                            '<span class="res-btn-content">' +
+                                '<span class="res-btn-label">YouTube Video</span>' +
+                                '<span class="res-btn-title">Product Usage Video</span>' +
+                            '</span>' +
+                            '<span class="res-badge badge-yt">▶ YT</span>' +
+                            '<span class="res-btn-arrow">→</span>' +
+                        '</a>';
+                }
+                if (testingUrl) {
+                    resourceHtml +=
+                        '<a href="' + testingUrl + '" target="_blank" class="res-action-btn btn-testing">' +
+                            '<span class="res-btn-icon">🌐</span>' +
+                            '<span class="res-btn-content">' +
+                                '<span class="res-btn-label">External Web Portal</span>' +
+                                '<span class="res-btn-title">Live Demo / Testing URL</span>' +
+                            '</span>' +
+                            '<span class="res-badge badge-live">LIVE</span>' +
+                            '<span class="res-btn-arrow">→</span>' +
+                        '</a>';
+                }
+                resourceHtml += '</div></div>';
+            }
+
+            var card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML =
+                '<div class="product-header">' +
+                    '<div class="product-code">' + code + '</div>' +
+                    '<div class="product-name">' + name + '</div>' +
+                    '<div class="product-desc">' + (product.Description || 'Professional solution for your business') + '</div>' +
+                '</div>' +
+                '<div class="product-body">' +
+                    resourceHtml +
+                    '<div class="suitability"><strong>Suitable for:</strong> ' + (product.SuitableFor || 'Small and Medium Businesses') + '</div>' +
+                    '<div class="currency-tabs">' +
+                        '<button class="currency-tab active" onclick="switchCurrency(this,\'' + code + '\',\'inr\')">₹ INR</button>' +
+                        '<button class="currency-tab" onclick="switchCurrency(this,\'' + code + '\',\'usd\')">$ USD</button>' +
+                    '</div>' +
+                    '<div class="pricing-options active" id="pricing-inr-' + code + '">' +
+                        (inrSales>0 ? '<div class="pricing-option"><span class="option-label">One-Time</span><span class="option-price">₹' + inrSales.toLocaleString('en-IN') + '</span></div>' : '') +
+                        (inrSub1 >0 ? '<div class="pricing-option"><span class="option-label">1 Year</span><span class="option-price">₹' + inrSub1.toLocaleString('en-IN')  + '</span></div>' : '') +
+                    '</div>' +
+                    '<div class="pricing-options" id="pricing-usd-' + code + '">' +
+                        (usdSales>0 ? '<div class="pricing-option"><span class="option-label">One-Time</span><span class="option-price">$' + usdSales.toFixed(2) + '</span></div>' : '') +
+                        (usdSub1 >0 ? '<div class="pricing-option"><span class="option-label">1 Year</span><span class="option-price">$' + usdSub1.toFixed(2)  + '</span></div>' : '') +
+                    '</div>' +
+                    '<div class="purchase-section">' + purchaseButtons + '</div>' +
+                '</div>';
+
+            container.appendChild(card);
+        });
+    }
+
+    function switchCurrency(btn, productCode, currency) {
+        var tabs = btn.parentElement.querySelectorAll('.currency-tab');
+        tabs.forEach(function(t) { t.classList.remove('active'); });
+        btn.classList.add('active');
+        document.querySelectorAll('#pricing-inr-' + productCode + ', #pricing-usd-' + productCode)
+            .forEach(function(el) { el.classList.remove('active'); });
+        document.getElementById('pricing-' + currency + '-' + productCode).classList.add('active');
+    }
+
+    function populateProductSelect(productList) {
+        var select = document.getElementById('productSelect');
+        select.innerHTML = '<option value="">Choose a product...</option>';
+        productList.forEach(function(product) {
+            var option = document.createElement('option');
+            option.value = product.ProductCode || product.productCode;
+            option.textContent = (product.ProductCode || product.productCode) + ' - ' + (product.ProductName || product.productName);
+            select.appendChild(option);
+        });
+    }
+
+    function populateBuyProductSelect(productList) {
+        var select = document.getElementById('buyProductSelect');
+        select.innerHTML = '<option value="">Choose a product...</option>';
+        productList.forEach(function(product) {
+            var hasOneTime = (parseFloat(product.rsSalesPrice) > 0 || parseFloat(product.dollSalesPrice) > 0);
+            if (hasOneTime) {
+                var option = document.createElement('option');
+                option.value = product.ProductCode || product.productCode;
+                option.textContent = (product.ProductCode || product.productCode) + ' - ' + (product.ProductName || product.productName);
+                select.appendChild(option);
+            }
+        });
+    }
+
+    // ============================================
+    // BUY & SUBSCRIBE LOGIC
+    // ============================================
+    function requireLogin(callback) {
+        if (currentUser) callback(); else promptLogin('client');
+    }
+    function quickBuy(productCode) {
+        document.getElementById('buyProductSelect').value = productCode;
+        updateBuyPricing(); showTab('buy');
+    }
+    function updateBuyPricing() {
+        var productCode = document.getElementById('buyProductSelect').value;
+        var currency    = document.getElementById('buyCurrency').value;
+        var pricingInfo = document.getElementById('buyPricingInfo');
+        if (!productCode) { pricingInfo.classList.add('hidden'); return; }
+        var product = products.find(function(p) { return (p.ProductCode||p.productCode) === productCode; });
+        if (!product) return;
+        var price  = currency==='INR' ? parseFloat(product.rsSalesPrice) : parseFloat(product.dollSalesPrice);
+        var symbol = currency==='INR' ? '₹' : '$';
+        document.getElementById('buyPriceDisplay').textContent = symbol + (price||0).toLocaleString();
+        pricingInfo.classList.remove('hidden');
+    }
+    function createOneTimePurchase() {
+        if (!currentUser) { promptLogin('client'); return; }
+        var productCode = document.getElementById('buyProductSelect').value;
+        var email       = document.getElementById('buyEmail').value;
+        var company     = document.getElementById('buyCompany').value;
+        var currency    = document.getElementById('buyCurrency').value;
+        if (!productCode || !email) { alert('Please fill all required fields'); return; }
+        var btn = document.getElementById('buyBtn');
+        btn.disabled = true; btn.textContent = 'Processing...';
+        google.script.run
+            .withSuccessHandler(function(result) {
+                btn.disabled = false; btn.textContent = 'Proceed to Buy - खरेदी करा';
+                if (result.success) {
+                    isOneTimePurchase = true;
+                    currentLinkData = { linkId: result.linkId, productCode: productCode,
+                        productName: getProductName(productCode), planType: 'one_time',
+                        currency: currency, amount: result.amount, transactionRef: result.transactionRef,
+                        productRegistrationNumber: result.productRegistrationNumber, email: email, isOneTime: true };
+                    document.getElementById('buySuccess').classList.remove('hidden');
+                    setTimeout(function() { showTab('checkout'); }, 1500);
+                } else { alert('Error: ' + result.error); }
+            })
+            .withFailureHandler(function(error) {
+                btn.disabled = false; btn.textContent = 'Proceed to Buy - खरेदी करा';
+                alert('Error: ' + error.message);
+            })
+            .createOneTimePurchaseLink({ productCode: productCode, clientEmail: email, currency: currency, clientName: company });
+    }
+    function quickSubscribe(productCode) {
+        document.getElementById('productSelect').value = productCode;
+        updateSubscriptionPlans(); showTab('subscribe');
+    }
+    function updateSubscriptionPlans() {
+        var productCode  = document.getElementById('productSelect').value;
+        var currency     = document.getElementById('currency').value;
+        var planSelector = document.getElementById('planSelector');
+        if (!productCode) { planSelector.innerHTML = '<p style="color:#666;">Select a product first</p>'; return; }
+        var product = products.find(function(p) { return (p.ProductCode||p.productCode) === productCode; });
+        if (!product) return;
+        var symbol = currency === 'INR' ? '₹' : '$';
+        var plans  = [];
+        var p3m = currency==='INR' ? parseFloat(product.rsSub3Month)  : parseFloat(product.dollSub3Month);
+        if (p3m  > 0) plans.push({ id:'3month', name:'3 Months', price:p3m  });
+        var p6m = currency==='INR' ? parseFloat(product.rsSub6Month)  : parseFloat(product.dollSub6Month);
+        if (p6m  > 0) plans.push({ id:'6month', name:'6 Months', price:p6m  });
+        var p1y = currency==='INR' ? parseFloat(product.rsSub1Yrs)    : parseFloat(product.dollSub1Yrs);
+        if (p1y  > 0) plans.push({ id:'1year',  name:'1 Year',   price:p1y  });
+        plans.push({ id:'trial', name:'Trial', price:0 });
+        planSelector.innerHTML = '';
+        selectedPlan = '';
+        plans.forEach(function(plan) {
+            var div = document.createElement('div');
+            div.className = 'plan-option';
+            div.innerHTML = '<div class="plan-name">' + plan.name + '</div>' +
+                            '<div class="plan-price">' + (plan.price > 0 ? symbol + plan.price : 'FREE') + '</div>';
+            div.onclick = function() {
+                document.querySelectorAll('.plan-option').forEach(function(el) { el.classList.remove('selected'); });
+                div.classList.add('selected'); selectedPlan = plan.id;
+            };
+            planSelector.appendChild(div);
+        });
+    }
+    function createSubscription() {
+        if (!currentUser) { promptLogin('client'); return; }
+        var productCode = document.getElementById('productSelect').value;
+        var email       = document.getElementById('customerEmail').value;
+        var company     = document.getElementById('companyName').value;
+        var currency    = document.getElementById('currency').value;
+        var regNumber   = document.getElementById('productRegNumber').value.trim();
+        if (!productCode || !selectedPlan || !email) { alert('Please fill all fields and select a plan'); return; }
+        var btn = document.getElementById('createSubBtn');
+        btn.disabled = true; btn.textContent = 'Creating...';
+        google.script.run
+            .withSuccessHandler(function(result) {
+                btn.disabled = false; btn.textContent = 'Create Subscription - सदस्यता तयार करा';
+                if (result.success) {
+                    isOneTimePurchase = false;
+                    currentLinkData = { linkId: result.linkId, productCode: productCode,
+                        productName: getProductName(productCode), planType: selectedPlan,
+                        currency: currency, amount: result.amount, transactionRef: result.transactionRef,
+                        productRegistrationNumber: result.productRegistrationNumber, email: email,
+                        isOneTime: false, isRenewal: result.isRenewal };
+                    document.getElementById('subscriptionSuccess').classList.remove('hidden');
+                    setTimeout(function() { showTab('checkout'); }, 1500);
+                } else { alert('Error: ' + result.error); }
+            })
+            .withFailureHandler(function(error) {
+                btn.disabled = false; btn.textContent = 'Create Subscription - सदस्यता तयार करा';
+                alert('Error: ' + error.message);
+            })
+            .createSubscriptionLink({ productCode: productCode, planType: selectedPlan, clientEmail: email,
+                currency: currency, companyName: company, productRegistrationNumber: regNumber || null });
+    }
+    function getProductName(code) {
+        var product = products.find(function(p) { return (p.ProductCode||p.productCode) === code; });
+        return product ? (product.ProductName || product.productName) : code;
+    }
+
+    // ============================================
+    // CHECKOUT LOGIC
+    // ============================================
+    function checkUrlParams() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var linkId = urlParams.get('linkId');
+        var action = urlParams.get('action');
+        if (linkId) {
+            currentLinkData = { linkId: linkId };
+            if (action === 'buy') isOneTimePurchase = true;
+            showTab('checkout');
+        }
+    }
+    function refreshCheckoutDisplay() {
+        if (!currentLinkData) {
+            document.getElementById('noCheckoutData').classList.remove('hidden');
+            document.getElementById('checkoutContent').classList.add('hidden');
+            return;
+        }
+        document.getElementById('noCheckoutData').classList.add('hidden');
+        document.getElementById('checkoutContent').classList.remove('hidden');
+        document.getElementById('checkoutSubtitle').textContent = currentLinkData.isOneTime ? 'एकवेळ खरेदी | One-time purchase' : 'सदस्यता | Subscription purchase';
+        document.getElementById('checkoutProductCode').textContent = currentLinkData.productCode;
+        document.getElementById('checkoutProductName').textContent = currentLinkData.productName;
+        document.getElementById('checkoutPlan').textContent = formatPlanName(currentLinkData.planType);
+        document.getElementById('checkoutRegNumber').textContent = currentLinkData.productRegistrationNumber || '-';
+        document.getElementById('checkoutEmail').textContent = currentLinkData.email;
+        document.getElementById('checkoutCurrency').textContent = currentLinkData.currency;
+        var symbol = currentLinkData.currency === 'INR' ? '₹' : '$';
+        document.getElementById('checkoutTotal').textContent = symbol + parseFloat(currentLinkData.amount).toLocaleString();
+        document.getElementById('manualAmount').textContent = symbol + currentLinkData.amount;
+        document.getElementById('amountPaid').value = currentLinkData.amount;
+        document.getElementById('referenceNumber').value = currentLinkData.transactionRef || generateClientRef();
+        document.getElementById('manualForm').style.display = 'none';
+        document.querySelector('.payment-options').style.display = 'grid';
+        document.getElementById('paymentSuccess').classList.add('hidden');
+        document.getElementById('paymentPending').classList.add('hidden');
+    }
+    function formatPlanName(plan) {
+        var names = { 'one_time':'आजीवन | One-Time', '3month':'3 महिने | 3 Months',
+                      '6month':'6 महिने | 6 Months', '1year':'1 वर्ष | 1 Year', 'trial':'चाचणी | Trial' };
+        return names[plan] || plan;
+    }
+    function generateClientRef() {
+        var date = new Date();
+        var ds = date.getFullYear() + String(date.getMonth()+1).padStart(2,'0') + String(date.getDate()).padStart(2,'0');
+        return 'TC-' + ds + '-' + Math.floor(1000 + Math.random()*9000);
+    }
+    function payWithPayPal() {
+        window.open('https://www.paypal.com/ncp/payment/H6BGWLEK2T8ZS ','_blank');
+        setTimeout(function() { processAutomaticPayment('paypal'); }, 5000);
+    }
+    function payWithRazorpay() {
+        window.open('https://rzp.io/rzp/omxDlDc ','_blank');
+        setTimeout(function() { processAutomaticPayment('razorpay'); }, 5000);
+    }
+    function processAutomaticPayment(method) {
+        var data = { linkId: currentLinkData.linkId, clientEmail: currentLinkData.email,
+            productCode: currentLinkData.productCode, planType: currentLinkData.planType,
+            amount: currentLinkData.amount, currency: currentLinkData.currency,
+            paymentMethod: method, reference: currentLinkData.transactionRef, isOneTime: currentLinkData.isOneTime };
+        var serverFn = currentLinkData.isOneTime ? 'processOneTimePurchase' : 'processPayment';
+        google.script.run
+            .withSuccessHandler(function(result) { if (result.success) showPaymentSuccess(result); else alert('Error: ' + result.error); })
+            .withFailureHandler(function(error) { alert('Error: ' + error.message); })
+            [serverFn](data);
+    }
+    function showManualForm() {
+        document.getElementById('manualForm').style.display = 'block';
+        document.querySelector('.payment-options').style.display = 'none';
+    }
+    function submitManualPayment() {
+        var reference  = document.getElementById('referenceNumber').value;
+        var date       = document.getElementById('paymentDate').value;
+        var amountPaid = document.getElementById('amountPaid').value;
+        if (!reference || !date || !amountPaid) { alert('Please fill all fields'); return; }
+        var data = { linkId: currentLinkData.linkId, clientEmail: currentLinkData.email,
+            productCode: currentLinkData.productCode, planType: currentLinkData.planType,
+            amount: amountPaid, currency: currentLinkData.currency, paymentMethod: 'manual',
+            reference: reference, paymentDate: date, isOneTime: currentLinkData.isOneTime };
+        var serverFn = currentLinkData.isOneTime ? 'processOneTimePurchase' : 'processPayment';
+        google.script.run
+            .withSuccessHandler(function(result) {
+                if (result.success) {
+                    if (result.pendingApproval) {
+                        document.getElementById('paymentPending').classList.remove('hidden');
+                        document.getElementById('pendingRegNumber').textContent = result.productRegistrationNumber;
+                        document.getElementById('manualForm').style.display = 'none';
+                    } else { showPaymentSuccess(result); }
+                } else { alert('Error: ' + result.error); }
+            })
+            .withFailureHandler(function(error) { alert('Error: ' + error.message); })
+            [serverFn](data);
+    }
+    function showPaymentSuccess(result) {
+        document.getElementById('paymentSuccess').classList.remove('hidden');
+        document.getElementById('manualForm').style.display = 'none';
+        document.querySelector('.payment-options').style.display = 'none';
+        var message = 'Your purchase was successful!';
+        if (result.productRegistrationNumber) message += '<br>Registration Number: <strong>' + result.productRegistrationNumber + '</strong>';
+        if (result.licenseKey)                message += '<br>License Key: <strong>' + result.licenseKey + '</strong>';
+        document.getElementById('paymentSuccessMessage').innerHTML = message;
+        if (result.sheetUrl) {
+            document.getElementById('sheetUrlContainer').classList.remove('hidden');
+            document.getElementById('sheetUrl').href = result.sheetUrl;
+            document.getElementById('sheetUrl').textContent = result.sheetUrl;
+        }
+    }
+
+    // ============================================
+    // STATUS CHECK
+    // ============================================
+    function checkStatus() {
+        var email     = document.getElementById('checkEmail').value;
+        var regNumber = document.getElementById('checkRegNumber').value;
+        if (!email) { alert('Please enter email'); return; }
+        document.getElementById('statusSearchForm').classList.add('hidden');
+        document.getElementById('statusLoading').classList.remove('hidden');
+        google.script.run
+            .withSuccessHandler(function(result) {
+                document.getElementById('statusLoading').classList.add('hidden');
+                if (!result.found) {
+                    document.getElementById('statusNotFound').classList.remove('hidden');
+                    document.getElementById('statusErrorMsg').textContent = result.error || 'Not found';
+                    return;
+                }
+                document.getElementById('statusDetails').classList.remove('hidden');
+                document.getElementById('statusRegNumber').textContent   = result.productRegistrationNumber || '-';
+                document.getElementById('statusProductName').textContent = result.productName || result.productCode || '-';
+                document.getElementById('statusPlan').textContent    = formatPlanName(result.currentPlan);
+                document.getElementById('statusText').textContent    = result.status.toUpperCase();
+                document.getElementById('statusExpiry').textContent  = result.expiryDate ? new Date(result.expiryDate).toLocaleDateString() : '-';
+                document.getElementById('statusDaysLeftText').textContent = (result.daysUntilExpiry || 0) + ' days';
+                document.getElementById('statusLicenseKey').textContent   = result.licenseKey || '-';
+                var badge = document.getElementById('statusBadge');
+                badge.className = 'status-badge ' + (result.status === 'active' ? 'status-active' : 'status-expired');
+                badge.textContent = result.status === 'active' ? '✓ सक्रिय | Active' : '✕ कालबाह्य | Expired';
+                if (result.sheetUrl) {
+                    document.getElementById('statusSheetUrl').classList.remove('hidden');
+                    document.getElementById('statusSheetLink').href = result.sheetUrl;
+                }
+            })
+            .withFailureHandler(function(error) {
+                document.getElementById('statusLoading').classList.add('hidden');
+                alert('Error: ' + error.message);
+            })
+            .checkSubscriptionStatus({ email: email, regNumber: regNumber });
+    }
+    </script>
+</body>
+</html>
