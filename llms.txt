@@ -1,0 +1,70 @@
+# Tukaram Consultancy SaaS Portal – llms.txt
+
+> Machine-readable catalog of all 45 Google Apps Script business systems available at https://mtd006.github.io/tukaramconsultancysaas/
+> Owner: Tukaram Consultancy · Phone +91-9820098200 · Email info@tukaramconsultancy.in · Navi Mumbai, Maharashtra, India.
+
+## About the store
+Tukaram Consultancy sells ready-made Google Apps Script business systems that customers can pay for, download and deploy on their own Google account - no developer help required. Each product comes as a Google Apps Script source-code package with PDF manual and deployment video.
+
+Pricing: Lifetime licence from ₹4,999 (USD 59). Yearly subscription also available with hosted updates.
+Payment: PayPal (international), Razorpay (UPI, cards, net banking), direct bank transfer (NEFT/RTGS for India).
+
+## All 45 products
+
+| # | Code | Title | Description | Best for |
+|---|------|-------|-------------|----------|
+| 1 | SLS-001 | Invoice Management - Sales | Automated sales invoicing with real-time receivable tracking. | SMB, Freelancer, Retail |
+| 2 | SLS-002 | Housing Society Management | Complete digital operations for cooperative housing societies. | Society, Admin, Committee |
+| 3 | SLS-003 | Transport Business Management System | End-to-end transport business operations & fleet management. | Transporter, Logistics, Fleet Owner |
+| 4 | SLS-004 | Dental Clinic Management | Full-scale dental clinic management from appointments to billing. | Dentist, Clinic Owner, Practitioner |
+| 5 | SLS-005 | Stock Management 1 | Total inventory control and stock management solution. | SMB, Retail, Warehouse |
+| 6 | SLS-006 | Online Legal Service Management System | Manage legal services businesses entirely online. | Law Firm, Advocate, Legalpreneur |
+| 7 | SLS-007 | After Sale Service - Product / Services | Streamlined post-sale service and support management. | SMB, Service Co., Warranty Teams |
+| 8 | SLS-008 | Invoice Management - Sales and Purchase | Dual-purpose invoicing for both sales and purchase transactions. | SMB, Trader, Distributor |
+| 9 | SLS-009 | Firm Management | Complete firm-wide operations and management platform. | SMB, Owner, Firm Admin |
+| 10 | SLS-010 | Redevelopment Document Management System | Document control system for housing society redevelopment projects. | Society, Developer, Committee |
+| 11 | SLS-011 | Housing Society Redevelopment Management System | Full lifecycle management for society redevelopment. | Society, Developer, Committee |
+| 12 | SLS-012 | Online Service Management (General) | Universal online service business management tool. | SMB, Freelancer, Agency |
+| 13 | SLS-013 | Poultry Firm Management System | Digital management for poultry farm operations. | Poultry Farmer, Agribusiness |
+| 14 | SLS-014 | Supplier Evaluation System | Supplier performance evaluation and reporting system. | Procurement, QA, SMB |
+| 15 | SLS-015 | Food QC Certification System | Quality control and certification management for food businesses. | FSSAI, Food Co., QA Team |
+| 16 | SLS-016 | Bulk WhatsApp - Messages | High-volume WhatsApp messaging and automation tool. | Marketing, Sales, Society |
+| 17 | SLS-017 | Bulk Email - Messages | Scalable email marketing and bulk sending platform. | Marketing, Sales, Enterprise |
+| 18 | SLS-018 | Dairy Firm Management System | Complete online management for dairy business operations. | Dairy Farmer, Co-op, Distributor |
+| 19 | SLS-019 | Clinic Management System | Total operational management for medical clinics. | Doctor, Clinic, Hospital |
+| 20 | SLS-020 | Rent Management System | Asset and rental income tracking system. | Landlord, Property Mgr, NRI |
+| 21 | SLS-021 | Grievance Redressal System | Corporate grievance handling and resolution workflow. | HR, Compliance, Enterprise |
+| 22 | SLS-022 | HACCP Food Safety Management System | HACCP-based food safety standard compliance system. | Food Co., QA, Plant Mgr |
+| 23 | SLS-023 | Payroll Management System | Automated payroll processing and employee compensation management. | HR, Payroll, SMB |
+| 24 | SLS-024 | ChatBot for Website | AI-powered chatbot integration for any website. | Website Owner, Marketer, Agency |
+| 25 | SLS-025 | Export Shipment Management System | Export shipment documentation and shipment tracking system. | Exporter, CHA, Trader |
+| 26 | SLS-026 | Beauty Parlor Management System | Online booking, service management, and operations for beauty parlors. | Salon Owner, Beautician, Spa |
+| 27 | SLS-027 | Stock Management 2 | General-purpose stock management for diverse businesses. | SMB, Retail, Warehouse |
+| 28 | SLS-028 | Employee Training Passbook | Digital training record and employee development passport. | HR, L & D, Enterprise |
+| 29 | SLS-029 | Budget Planner | Simple yet powerful budget planning tool for anyone. | Individual, Home, Freelancer |
+| 30 | SLS-030 | Study Planner | Smart study planner to help students achieve academic goals. | Student, Parent, Teacher |
+| 31 | SLS-031 | Gate Pass Management System | Secure digital gate pass and access control system. | Factory, Society, Campus |
+| 32 | SLS-032 | Quotation Master | Organized quotation and offer management system. | Sales, SMB, Consultant |
+| 33 | SLS-033 | Machine Maintenance & Record Keeper | Centralized machine records, manuals, licenses, and maintenance logs. | Plant Mgr, Maintenance, Factory |
+| 34 | SLS-034 | Private Class Management System | Complete management for private tutoring and coaching classes. | Tutor, Coaching, Trainer |
+| 35 | SLS-035 | Construction Management System | End-to-end construction project and business management. | Builder, Contractor, Site Mgr |
+| 36 | SLS-036 | HR Consultancy Management System | Manage corporate profiles, clients, and HR consultancy operations. | HR Consultant, Recruiter, Agency |
+| 37 | SLS-037 | Own Ecommerce / Online Shop | Launch your own online store and start selling instantly. | Entrepreneur, SMB, Creator |
+| 38 | SLS-038 | My Village - Grampanchayat | Digital operation management for village panchayats. | Grampanchayat, Govt, Citizen |
+| 39 | SLS-039 | Car Service Centre | Web-based car service center management and online bookings. | Garage, Service Ctr, Workshop |
+| 40 | SLS-040 | Import Shipment Management System | Import shipment documentation and detailed tracking system. | Importer, CHA, Trader |
+| 41 | SLS-041 | Stock Management 3 | Advanced multi-location inventory control with real-time stock tracking. | Multi-branch Retail, Chain, Warehouse |
+| 42 | SLS-042 | Cargo Loading Planner | Intelligent container loading planner with space optimization, container loading with loading calculation and details. | Shipper, CHA, Logistics |
+| 43 | SLS-043 | Stock Register | Comprehensive digital inventory and stock management system to track item movements, maintain real-time stock levels, and generate valuation reports. | SMB, Retail, Warehouse |
+| 44 | SLS-044 | Task and Event Manager | Smart task scheduling and reminder system with deadline tracking, priority management, recurring tasks, and automated notification alerts. | Individual, Team, Enterprise |
+| 45 | SLS-045 | Lead Generator System | Automated lead capture, tracking, and nurturing platform to identify prospects, manage pipelines, and convert opportunities into customers. | Sales, Marketer, Agency |
+
+## Deploy process
+1. Pick the system on this page and click Buy Lifetime or Subscribe Yearly.
+2. Pay via PayPal / Razorpay / Bank Transfer.
+3. Receive the Google Apps Script source code + manual PDF + deployment video by email.
+4. Copy the source into your own Apps Script project, attach a Google Sheet and deploy as Web App.
+
+## Related portals
+- Parent Legal & Corporate portal: https://mtd006.github.io/tukaramconsultancyonline/
+- LaunchPad Academy (career-skills academy): https://mtd006.github.io/launchpadacademy/
